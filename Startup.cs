@@ -11,6 +11,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Microsoft.EntityFrameworkCore;
+using HotelApi.Infra;
+using HotelApi.Data;
 
 namespace hotel_api
 {
@@ -26,6 +29,11 @@ namespace hotel_api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+			var mySQLSettings = Configuration.GetSection(nameof (MySQLSettings)).Get<MySQLSettings>();
+
+			services.AddDbContext<DatabaseContext>(options =>
+				options.UseMySql(mySQLSettings.ConnectionString, ServerVersion.AutoDetect(mySQLSettings.ConnectionString))
+			);
 
             services.AddControllers();
             services.AddCors(opt => {
