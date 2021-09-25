@@ -14,6 +14,7 @@ using Microsoft.OpenApi.Models;
 using Microsoft.EntityFrameworkCore;
 using HotelApi.Infra;
 using HotelApi.Data;
+using HotelApi.Config.Infra;
 
 namespace hotel_api
 {
@@ -30,6 +31,10 @@ namespace hotel_api
         public void ConfigureServices(IServiceCollection services)
         {
 			var mySQLSettings = Configuration.GetSection(nameof (MySQLSettings)).Get<MySQLSettings>();
+			/* var testing = DatabaseConfig.GetDatabaseConnectionString(); */
+			/* Console.WriteLine(DatabaseConfig.GetDatabaseConnectionString()); */
+			/* string test = DatabaseConfig.Load("Host"); */
+			/* Console.WriteLine(test); */
 
 			services.AddDbContext<DatabaseContext>(options =>
 				options.UseMySql(mySQLSettings.ConnectionString, ServerVersion.AutoDetect(mySQLSettings.ConnectionString))

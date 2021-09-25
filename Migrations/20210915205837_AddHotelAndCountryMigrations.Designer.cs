@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace hotel_api.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20210914190026_AddHotelAndCountryMigrations")]
+    [Migration("20210915205837_AddHotelAndCountryMigrations")]
     partial class AddHotelAndCountryMigrations
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,6 +33,26 @@ namespace hotel_api.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Countries");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "any_name_1",
+                            ShortName = "any_short_name_1"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "any_name_2",
+                            ShortName = "any_short_name_2"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "any_name_3",
+                            ShortName = "any_short_name_3"
+                        });
                 });
 
             modelBuilder.Entity("HotelApi.Domain.Hotel", b =>
@@ -58,6 +78,32 @@ namespace hotel_api.Migrations
                     b.HasIndex("CountryId");
 
                     b.ToTable("Hotels");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Address = "any_address_1",
+                            CountryId = 1,
+                            Name = "any_name_1",
+                            Rating = 2.5
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Address = "any_address_2",
+                            CountryId = 2,
+                            Name = "any_name_2",
+                            Rating = 4.5
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Address = "any_short_name_3",
+                            CountryId = 1,
+                            Name = "any_name_3",
+                            Rating = 3.5
+                        });
                 });
 
             modelBuilder.Entity("HotelApi.Domain.Hotel", b =>
